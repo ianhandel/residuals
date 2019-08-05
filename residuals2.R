@@ -22,7 +22,7 @@ ggplot(dat) +
   geom_segment(aes(
     x = group_jittered, xend = group_jittered,
     y = score, yend = group_mean), lty = 3) +
-  scale_x_continuous(breaks = c(1, 2), labels = c("A", "B")) +
+  scale_x_continuous(breaks = c(1, 2), labels = levels(dat$group)) +
   geom_segment(data = groups,
                aes(x = x, xend = xend,
                    y = group_mean, yend = group_mean)) +
