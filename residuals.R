@@ -31,3 +31,5 @@ ggplot(dat) +
                    y = group_mean, yend = group_mean)) +
   theme(legend.position = "none") +
   labs(x = "Group")
+
+ggsave("resduals.pdf", height = 6, width = 6)
