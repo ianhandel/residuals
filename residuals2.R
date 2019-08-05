@@ -1,9 +1,11 @@
 library(tidyverse)
 
 group1 <- rnorm(n = 10)
-group2 <- rnorm(n = 10, mean = 5)
-dat <- tibble(group1, group2) %>%
-  gather(key = group, value = score, group1:group2) %>%
+group2 <- rnorm(n = 10, mean = 7)
+group3 <- rnorm(n = 10, mean = 5)
+
+dat <- tibble(group1, group2, group3) %>%
+  gather(key = group, value = score, group1:group3) %>%
   mutate(group = factor(group)) %>%
   group_by(group) %>% 
   mutate(group_jittered = seq(as.numeric(unique(group)) - 0.2,
@@ -22,7 +24,8 @@ ggplot(dat) +
   geom_segment(aes(
     x = group_jittered, xend = group_jittered,
     y = score, yend = group_mean), lty = 3) +
-  scale_x_continuous(breaks = c(1, 2), labels = levels(dat$group)) +
+  scale_x_continuous(breaks = unique(as.numeric(dat$group)),
+                     labels = levels(dat$group)) +
   geom_segment(data = groups,
                aes(x = x, xend = xend,
                    y = group_mean, yend = group_mean)) +
